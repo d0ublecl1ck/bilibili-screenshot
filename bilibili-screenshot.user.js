@@ -5,6 +5,7 @@
 // @description  为B站视频添加截屏功能
 // @author       d0ublecl1ck
 // @match        https://www.bilibili.com/video/*
+// @match        https://www.bilibili.com/list/*
 // @icon         https://static.hdslb.com/mobile/img/512.png
 // @grant        GM_setValue
 // @grant        GM_getValue
