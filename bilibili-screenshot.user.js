@@ -37,7 +37,7 @@
 
     // 默认快捷键
     const DEFAULT_HOTKEY = 'S';
-    
+
     // 获取保存的快捷键或使用默认值
     let screenshotHotkey = GM_getValue('screenshotHotkey', DEFAULT_HOTKEY);
 
@@ -146,13 +146,13 @@
         button.setAttribute('role', 'button');
         button.setAttribute('aria-label', '截屏');
         button.setAttribute('tabindex', '0');
-        
+
         // 添加右键菜单事件
         button.addEventListener('contextmenu', (e) => {
             e.preventDefault();
             settingsPanel.classList.add('show');
         });
-        
+
         button.addEventListener('click', takeScreenshot);
         return button;
     }
@@ -183,16 +183,21 @@
         const video = document.querySelector('video');
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        
+
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-        // 获取当前视频时间戳
-        const currentTime = video.currentTime;
-        const minutes = Math.floor(currentTime / 60);
-        const seconds = Math.floor(currentTime % 60);
-        const timestamp = `${minutes.toString().padStart(2, '0')}-${seconds.toString().padStart(2, '0')}`;
+        // 获取当前日期和时间
+        const now = new Date();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        // const seconds = now.getSeconds().toString().padStart(2, '0'); // You can add seconds if needed
+
+        // 创建时间戳
+        const timestamp = `${month}${day}${hours}${minutes}`;
 
         // 创建下载链接
         const link = document.createElement('a');
@@ -227,4 +232,4 @@
 
     // 页面加载完成后初始化
     window.addEventListener('load', init);
-})(); 
+})();
